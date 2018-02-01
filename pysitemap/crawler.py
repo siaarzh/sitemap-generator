@@ -19,7 +19,7 @@ try:
     monkey.patch_all()
     gevent_installed = True
 except:
-    print("Gevent does not installed. Parsing process will be slower.")
+    print("Gevent is not installed. Parsing process will be slower.")
     gevent_installed = False
 
 
@@ -30,7 +30,7 @@ class Crawler:
         self.oformat = oformat
         self.outputfile = outputfile
 
-        # create lists for the urls in que and visited urls
+        # create lists for urls in queue and visited urls
         self.urls = set([url])
         self.visited = set([url])
         self.exts = ['htm', 'php']
@@ -92,7 +92,7 @@ class Crawler:
             url = self.urls.pop()
             try:
                 response = requests.get(url)
-                # if status code is not 404, then add url in seld.errors dictionary
+                # if status code is not 404, then add url in self.errors dictionary
                 if response.status_code != 200:
                     if self.errors.get(str(response.status_code), False):
                         self.errors[str(response.status_code)].extend([url])
